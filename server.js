@@ -8,9 +8,11 @@ var apiRoutes         = require('./routes/api.js');
 var fccTestingRoutes  = require('./routes/fcctesting.js');
 var runner            = require('./test-runner');
 
+require('dotenv').config();
+
 var app = express();
 
-app.use('/public', express.static(process.cwd() + '/public'));
+app.use('/client/public', express.static(process.cwd() + '/public'));
 
 app.use(cors({origin: '*'})); //USED FOR FCC TESTING PURPOSES ONLY!
 
@@ -20,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Index page (static HTML)
 app.route('/')
   .get(function (req, res) {
-    res.sendFile(process.cwd() + '/views/index.html');
+    res.sendFile(process.cwd() + '/client/public/index.html');
   });
 
 //For FCC testing purposes
