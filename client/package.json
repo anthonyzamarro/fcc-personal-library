@@ -8,6 +8,7 @@
     "build": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "proxy": "http://localhost:3000",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "css-loader": "^2.1.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-hot-loader": "^4.3.11",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
