@@ -1,26 +1,36 @@
 'use strict';
 
-var express     = require('express');
-var bodyParser  = require('body-parser');
-var cors        = require('cors');
+const express     = require('express');
+const bodyParser  = require('body-parser');
+const cors        = require('cors');
+const path        = require('path');
+const helmet      = require('helmet');
 
-var apiRoutes         = require('./routes/api.js');
-var fccTestingRoutes  = require('./routes/fcctesting.js');
-var runner            = require('./test-runner');
 
-var app = express();
+const apiRoutes         = require('./routes/api.js');
+const fccTestingRoutes  = require('./routes/fcctesting.js');
+const runner            = require('./test-runner');
 
-app.use('/public', express.static(process.cwd() + '/public'));
+require('dotenv').config();
+
+const app = express();
+
+// app.use('/client/public', express.static(process.cwd() + '/public'));
 
 app.use(cors({origin: '*'})); //USED FOR FCC TESTING PURPOSES ONLY!
 
+// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(helmet.noCache());
+app.use(helmet.hidePoweredBy({setTo: 'PHP 4.2.0'}));
 
 //Index page (static HTML)
+app.use(express.static("dist"));
+
 app.route('/')
   .get(function (req, res) {
-    res.sendFile(process.cwd() + '/views/index.html');
+    res.sendFile(process.cwd() + '/client/public/index.html');
   });
 
 //For FCC testing purposes
