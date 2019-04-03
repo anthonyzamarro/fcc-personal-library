@@ -32,7 +32,6 @@ module.exports = function (app) {
     
     .post(function (req, res){
       const title = req.body.title;
-    
       Model.addBook(req.body, (dbRes, code) => {
         res.status(code).send(dbRes);
       });
