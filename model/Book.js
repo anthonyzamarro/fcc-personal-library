@@ -18,7 +18,7 @@ const addBook = (book, cb) => {
 			// const response = {...newProject, "id": newProject._id}
 			cb('added', 200)
 		}
-	})
+	});
 }
 
 
