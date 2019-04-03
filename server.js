@@ -30,7 +30,6 @@ app.use(express.static("dist"));
 
 app.route('/')
   .get(function (req, res) {
-    console.log('inside server.js ',req.body);
     res.sendFile(process.cwd() + '/client/public/index.html');
   });
 
