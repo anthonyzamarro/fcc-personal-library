@@ -10,6 +10,8 @@
 
 const expect = require('chai').expect;
 const controller = require('../controller/handleRequests');
+const express = require('express');
+const router = express.Router();
 
 // const MongoClient = require('mongodb').MongoClient;
 // const ObjectId = require('mongodb').ObjectId;
@@ -20,6 +22,7 @@ const controller = require('../controller/handleRequests');
 module.exports = function (app) {
 
   app.route('/api/books')
+
     .get(
       // console.log('GET in api.js', req.params);
       controller.getAllBooks
@@ -27,11 +30,7 @@ module.exports = function (app) {
       //json res format: [{"_id": bookid, "title": book_title, "commentcount": num_of_comments },...]
     )
     
-    .post(function (req, res){
-      const title = req.body.title;
-      controller.addBook
-      //response will contain new book object including atleast _id and title
-    })
+    .post(controller.addBook)
     
     .delete(function(req, res){
       //if successful response will be 'complete delete successful'

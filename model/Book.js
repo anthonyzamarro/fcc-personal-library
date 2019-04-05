@@ -2,21 +2,28 @@ const { Book } = require('./Schema');
 
 const getAllBooks = (books, cb) => {
   console.log('books in Book.js', books);
-  cb('We did it', 200);
+  Book.find({}, (err, docs) => {
+  	if (err) {
+  		cb(err, 400);
+  	} else {
+  		cb(docs, 200);
+  	}
+  })
 }
 
 const addBook = (book, cb) => {
   console.log('books in Book.js', book);
-  // console.log(`Issue.js createProject`, project.body)
+
 	const newBook = new Book({
-		// title: project.body.project_title
-	})
+		title: book.title
+	});
+
 	newBook.save((err) => {
 		if (err) {
 			cb(err, 400)
 		} else {
-			// const response = {...newProject, "id": newProject._id}
-			cb('added', 200)
+			const response = {...newBook, "id": newBook._id};
+			cb(response, 200)
 		}
 	});
 }

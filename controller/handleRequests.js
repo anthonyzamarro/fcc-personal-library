@@ -10,7 +10,6 @@ module.exports = {
 
 	addBook: (req, res) => {
 		Model.addBook(req.body, (dbRes, code) => {
-			console.log('handleRequests addBook')
 	        res.status(code).send(dbRes);
 	    });
 	}
