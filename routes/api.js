@@ -32,9 +32,7 @@ module.exports = function (app) {
     
     .post(controller.addBook)
     
-    .delete(function(req, res){
-      //if successful response will be 'complete delete successful'
-    });
+    .delete(controller.deleteAllBooks);
 
 
 

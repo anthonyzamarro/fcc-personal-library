@@ -28,8 +28,15 @@ const addBook = (book, cb) => {
 	});
 }
 
+const deleteAllBooks = (books, cb) => {
+	console.log('deleteAllBooks in Book.js', books);
+	Book.collection.deleteMany({})
+	cb('complete delete successful', 200)
+}
+
 
 module.exports = {
   getAllBooks,
-  addBook
+  addBook,
+  deleteAllBooks
 }

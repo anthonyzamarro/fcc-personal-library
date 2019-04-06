@@ -12,16 +12,11 @@ class AddBookForm extends Component {
 	}
 
 	handleChange(event) {
-		// console.log('change happened')
 		this.setState({value: event.target.value});
 	}
 
 	handleSubmit(event) {
-		// console.log('hello ' + this.state.value);
-		// axios
-		// .post('http://localhost:3000/api/books', this.state.value)
-		// .then((response) => console.log('responding', response));
-		this.props.postedResult(event)
+		const val = this.state.value;
 		fetch('http://localhost:3000/api/books',{
 		    method: 'POST',
 		    body: JSON.stringify({
@@ -29,19 +24,24 @@ class AddBookForm extends Component {
 		    }),
 		    headers: {"Content-Type": "application/json"}
 		  })
-		  .then(function(response){
+		  .then((response) =>{
 		    return response.json()
 		  })
-		  .then(function(body){
-		  	// this is undefined here
-		  	// not reading component
-		    console.log(this);
+		  .then((body) => {
+		  	/*
+	  		problem; 'this' is undefined and doesnt
+	  		recognize current component
 
-		    // this.props.postedResult(body)
+	  		solution: either assign 'this' to variable
+	  		outside of scope and use inside of function() {...}
+	  		OR use arrow function which creates lexical scope which
+	  		'this' will refer to the current scope
+		  	*/
+		    this.props.postedResult(body);
 		  })
 		  .catch((err) => {
 		  	console.log('fetch error', err)
-		  })
+		  });
 
 		event.preventDefault();
 	}

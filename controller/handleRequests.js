@@ -12,5 +12,11 @@ module.exports = {
 		Model.addBook(req.body, (dbRes, code) => {
 	        res.status(code).send(dbRes);
 	    });
+	},
+
+	deleteAllBooks: (req, res) => {
+		Model.deleteAllBooks(req.body, (dbRes, code) => {
+	        res.status(code).send(dbRes);
+	    });
 	}
 }
