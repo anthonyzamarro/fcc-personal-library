@@ -43,13 +43,15 @@ module.exports = function (app) {
     })
     
     .post(function(req, res){
-      const bookid = req.params.id;
-      const comment = req.body.comment;
+      // const bookid = req.params.id;
+      // const comment = req.body.comment;
       //json res format same as .get
+      controller.addComment(req, res);
     })
     
     .delete(function(req, res){
-      const bookid = req.params.id;
+      // console.log('deleteOneBook routes', req)
+      controller.deletOneBook(req, res)
       //if successful response will be 'delete successful'
     });
   

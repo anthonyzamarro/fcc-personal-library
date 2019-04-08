@@ -15,11 +15,13 @@ class App extends Component {
 		this.state = {
 			newBook: "",
 			deleteAll: false,
-			singleBook: ""
+			singleBook: "",
+			deleteOneId: ""
 		}
 		this.postedNewBook = this.postedNewBook.bind(this);
 		this.deleteAllBooks = this.deleteAllBooks.bind(this);
-		this.oneBook = this.oneBook.bind(this);
+		this.viewOneBook = this.viewOneBook.bind(this);
+		this.removeBookFromList = this.removeBookFromList.bind(this);
 	}
 
 	postedNewBook(res) {
@@ -34,24 +36,36 @@ class App extends Component {
 		}));
 	}
 
-	oneBook(res) {
+	viewOneBook(res) {
 		this.setState({
 			singleBook: res
 		});
 	}
 
+	removeBookFromList(res) {
+		this.setState({
+			deleteOneId: res
+		})
+	}
+
+
+
   render(){
     return(
       <div className="App">
         <h1> Personal Libary </h1>
-        <Book bookInfo={this.state.singleBook} />
-        <DeleteAllButton delete={this.deleteAllBooks}/>
+        <Book 
+        	deleteOneBook={this.removeBookFromList}
+        	bookInfo={this.state.singleBook} 
+        />
         <AddBookForm postedResult={this.postedNewBook} />
         <BookList 
         	addedBook={this.state.newBook}
         	shouldDelete={this.state.deleteAll}
-        	oneFromList={this.oneBook}
+        	viewOneFromList={this.viewOneBook}
+        	deleteOneFromList={this.state.deleteOneId}
         />
+        <DeleteAllButton delete={this.deleteAllBooks}/>
       </div>
     );
   }

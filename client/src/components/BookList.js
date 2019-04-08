@@ -34,6 +34,13 @@ class BookList extends Component {
 				allBooks: []
 			})
 		}
+
+		if (this.props.deleteOneFromList !== prevProps.deleteOneFromList) {
+			console.log('deleteOneFromList BookList.js',this.props.deleteOneFromList, this.state);
+			this.setState({
+				allBooks: this.state.allBooks.filter(book => book._id != this.props.deleteOneFromList)
+			})
+		}
 	}
 
 
@@ -42,7 +49,7 @@ class BookList extends Component {
 			return (
 				<li 
 					key={book._id}
-					onClick={e => this.props.oneFromList(book)}
+					onClick={e => this.props.viewOneFromList(book)}
 				>
 					{book.title}
 				</li>
