@@ -1,7 +1,6 @@
 const { Book } = require('./Schema');
 
 const getAllBooks = (books, cb) => {
-  // console.log('books in Book.js', books);
   Book.find({}, (err, docs) => {
   	if (err) {
   		cb(err, 400);
@@ -32,7 +31,14 @@ const addComment = (book, cb) => {
 	const bookId = book.params.id;
 	const comment = book.body.comments;
 	Book.findById(bookId, (err, doc) => {
-		console.log('addComment in Book.js', doc);
+		if (err) {
+			cb(err, 200)
+		} else {
+			doc.comments.push(comment);
+			doc.markModified('comments');
+			doc.save();
+			cb(doc.comments, 200);
+		}
 	});
 
 }
@@ -44,7 +50,6 @@ const deleteAllBooks = (books, cb) => {
 }
 
 const deleteOneBook = (bookId, cb) => {
-	// console.log('deleteOneBook in Book.js', bookId);
 	Book.deleteOne({_id: bookId}, (err, doc) => {
 		if (err) {
 			cb(err, 400);

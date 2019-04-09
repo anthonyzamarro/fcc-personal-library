@@ -39,6 +39,8 @@ module.exports = function (app) {
   app.route('/api/books/:id')
     .get(function (req, res){
       const bookid = req.params.id;
+
+      console.log('bookid', bookid)
       //json res format: {"_id": bookid, "title": book_title, "comments": [comment,comment,...]}
     })
     

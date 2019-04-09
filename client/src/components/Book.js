@@ -6,13 +6,23 @@ class Book extends Component {
 
 		this.state = {
 			addCommentsForm: false,
-			commentText: ""
+			commentText: "",
+			commentList: this.props.bookInfo.comments
 		}
 
 		this.deletOne = this.deletOne.bind(this);
 		this.addCommentButton = this.addCommentButton.bind(this);
 		this.addComment = this.addComment.bind(this);
 		this.getCommentText = this.getCommentText.bind(this);
+
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.props.commentFromId !== prevProps.commentFromId) {
+			this.setState({
+				commentList: this.state.commentList.concat(this.props.commentFromId)
+			})
+		}
 	}
 
 	addCommentButton(id) {
@@ -28,8 +38,7 @@ class Book extends Component {
 
 	addComment(e) {
 		e.preventDefault();
-		let text = this.state.commentText
-		console.log(text, this.props.bookInfo)
+		let text = this.state.commentText;
 		fetch(`http://localhost:3000/api/books/${this.props.bookInfo._id}`, {
 			method: "POST",
 			body: JSON.stringify({
@@ -37,8 +46,14 @@ class Book extends Component {
 		    }),
 		    headers: {"Content-Type": "application/json"}
 		})
-		.then(res => console.log(res))
-		.then(response => console.log('addComment received', response))
+		.then(res => res)
+		.then(response => {
+			if (response.status == 200) {
+				this.setState({
+					commentList: this.state.commentList.concat(text)
+				});
+			}
+		})
 		.catch(err => console.log('addCOmment error', err))
 	}
 
@@ -57,11 +72,16 @@ class Book extends Component {
 	}
 
 	render() {
-		// console.log('Book constructor', this.props);
+		console.log('Book constructor', this.props);
+		let bookComments = this.state.commentList.length <= 0 
+		? '' : this.state.commentList.map((comment, key) => {
+			return <li key={key}>{comment}</li>
+		});
 		return (
 			<div className="Book">
-				{this.props.bookInfo.title}
-				{this.props.bookInfo.comments}
+				<div className="book-title">Title:{this.props.bookInfo.title}</div>
+				<div className="book-comments">Comments:<br/>{bookComments}</div>
+				<div className="book-id">ID:{this.props.bookInfo._id}</div>
 				{this.props.bookInfo !== "" && <button onClick={e => this.deletOne(this.props.bookInfo._id)}>Delete book</button>}
 				{this.props.bookInfo !== "" && <button onClick={e => this.addCommentButton(this.props.bookInfo._id)}>Add Comment</button>}
 				{this.state.addCommentsForm && 

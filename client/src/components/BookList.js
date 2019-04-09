@@ -36,7 +36,6 @@ class BookList extends Component {
 		}
 
 		if (this.props.deleteOneFromList !== prevProps.deleteOneFromList) {
-			console.log('deleteOneFromList BookList.js',this.props.deleteOneFromList, this.state);
 			this.setState({
 				allBooks: this.state.allBooks.filter(book => book._id != this.props.deleteOneFromList)
 			})

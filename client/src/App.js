@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AddBookForm  from './components/AddBookForm';
 import BookList  from './components/BookList';
 import Book from './components/Book';
+// import GetBookByTitle from './components/GetBookByTitle';
+import CommentByIdForm from './components/CommentByIdForm';
 import DeleteAllButton from './components/DeleteAllButton';
 
 import { hot } from "react-hot-loader";
@@ -16,18 +18,21 @@ class App extends Component {
 			newBook: "",
 			deleteAll: false,
 			singleBook: "",
-			deleteOneId: ""
+			viewBook: false,
+			deleteOneId: "",
+			commentFromIdForm: ""
 		}
 		this.postedNewBook = this.postedNewBook.bind(this);
 		this.deleteAllBooks = this.deleteAllBooks.bind(this);
 		this.viewOneBook = this.viewOneBook.bind(this);
 		this.removeBookFromList = this.removeBookFromList.bind(this);
+		this.addCommentById = this.addCommentById.bind(this);
 	}
 
 	postedNewBook(res) {
 		this.setState({
 			newBook: res
-		})
+		});
 	}
 
 	deleteAllBooks(res) {
@@ -38,13 +43,20 @@ class App extends Component {
 
 	viewOneBook(res) {
 		this.setState({
-			singleBook: res
+			singleBook: res,
+			viewBook: true
 		});
 	}
 
 	removeBookFromList(res) {
 		this.setState({
 			deleteOneId: res
+		});
+	}
+
+	addCommentById(res) {
+		this.setState({
+			commentFromIdForm: res
 		})
 	}
 
@@ -54,9 +66,15 @@ class App extends Component {
     return(
       <div className="App">
         <h1> Personal Libary </h1>
-        <Book 
-        	deleteOneBook={this.removeBookFromList}
-        	bookInfo={this.state.singleBook} 
+        {this.state.viewBook && 
+        	<Book 
+        		deleteOneBook={this.removeBookFromList}
+        		bookInfo={this.state.singleBook}
+        		commentFromId={this.state.commentFromIdForm}
+        	/>
+    	}
+        <CommentByIdForm 
+        	commentById={this.addCommentById}
         />
         <AddBookForm postedResult={this.postedNewBook} />
         <BookList 
