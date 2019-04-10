@@ -66,24 +66,30 @@ class App extends Component {
     return(
       <div className="App">
         <h1> Personal Libary </h1>
-        {this.state.viewBook && 
-        	<Book 
-        		deleteOneBook={this.removeBookFromList}
-        		bookInfo={this.state.singleBook}
-        		commentFromId={this.state.commentFromIdForm}
-        	/>
-    	}
-        <CommentByIdForm 
-        	commentById={this.addCommentById}
-        />
-        <AddBookForm postedResult={this.postedNewBook} />
-        <BookList 
-        	addedBook={this.state.newBook}
-        	shouldDelete={this.state.deleteAll}
-        	viewOneFromList={this.viewOneBook}
-        	deleteOneFromList={this.state.deleteOneId}
-        />
-        <DeleteAllButton delete={this.deleteAllBooks}/>
+	        <div className="container">
+	        	<div className="form-container">
+		        <AddBookForm postedResult={this.postedNewBook} />
+		        <CommentByIdForm 
+		        	commentById={this.addCommentById}
+		        />
+	        	</div>
+	        	<div className="book-container">
+		        <BookList 
+		        	addedBook={this.state.newBook}
+		        	shouldDelete={this.state.deleteAll}
+		        	viewOneFromList={this.viewOneBook}
+		        	deleteOneFromList={this.state.deleteOneId}
+		        />
+		        {this.state.viewBook && 
+		        	<Book 
+		        		deleteOneBook={this.removeBookFromList}
+		        		bookInfo={this.state.singleBook}
+		        		commentFromId={this.state.commentFromIdForm}
+		        	/>
+		    	}
+	        	</div>
+		    </div>
+		    <DeleteAllButton delete={this.deleteAllBooks}/>
       </div>
     );
   }

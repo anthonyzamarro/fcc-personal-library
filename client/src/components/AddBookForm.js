@@ -17,7 +17,7 @@ class AddBookForm extends Component {
 
 	handleSubmit(event) {
 		const val = this.state.value;
-		fetch('http://localhost:3000/api/books',{
+		fetch('api/books',{
 		    method: 'POST',
 		    body: JSON.stringify({
 		      title: this.state.value
@@ -34,7 +34,7 @@ class AddBookForm extends Component {
 
 	  		solution: either assign 'this' to variable
 	  		outside of scope and use inside of function() {...}
-	  		OR use arrow function which creates lexical scope which
+	  		OR use arrow function which creates lexical scope in which
 	  		'this' will refer to the current scope
 		  	*/
 		    this.props.postedResult(body);
@@ -49,9 +49,11 @@ class AddBookForm extends Component {
   render() {
     return(
       <div className="AddBookForm">
+      <h3>Add a Book</h3>
         <form onSubmit={this.handleSubmit}>
         <label>
         	Book Title:
+        	<br />
         	<input type="text" value={this.state.value} onChange={this.handleChange}/>
         </label>
         <input type="submit" value="Submit" />

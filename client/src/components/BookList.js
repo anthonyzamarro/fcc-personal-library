@@ -57,6 +57,7 @@ class BookList extends Component {
 
 		return(
 			<div className="BookList">
+			<h3>Book List</h3>
 				{bookTitles}
 			</div>
 		);

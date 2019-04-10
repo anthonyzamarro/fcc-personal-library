@@ -25,7 +25,7 @@ class DeleteAllButton extends Component {
 
 	render() {
 		return (
-			<button onClick={e => this.deleteBooks(e)}>Delete All Books</button>
+			<button onClick={e => this.deleteBooks(e)} className="delete-all-btn">Delete All Books</button>
 		);
 	}
 }

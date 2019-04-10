@@ -1,4 +1,34 @@
+html {
+	background: #b3e6e74a;
+}
 .App {
   margin: 1rem;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+    justify-content: space-evenly;
+}
+
+.form-container,
+.book-container {
+	align-self: end;
+}
+
+.delete-all-btn {
+	background: tomato;
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+	height: 50px;
+	width: 175px;
+	border-radius: 3px;
+	border: none;
+	box-shadow: 0px 1px 2px #000;
+	margin: 4px;
+	position: absolute;
+    top: 15px;
+    right: 15px;
 }

@@ -35,6 +35,7 @@ class CommentByIdForm extends Component {
 	render() {
 		return (
 			<div className="CommentByIdForm">
+				<h3>Comment By ID</h3>
 				<form onSubmit={this.handleSubmit}>
 					<label>
 					Book Id:

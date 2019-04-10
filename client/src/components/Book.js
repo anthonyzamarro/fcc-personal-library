@@ -79,6 +79,7 @@ class Book extends Component {
 		});
 		return (
 			<div className="Book">
+				<h3>Book</h3>
 				<div className="book-title">Title:{this.props.bookInfo.title}</div>
 				<div className="book-comments">Comments:<br/>{bookComments}</div>
 				<div className="book-id">ID:{this.props.bookInfo._id}</div>
