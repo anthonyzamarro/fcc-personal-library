@@ -15,6 +15,7 @@ const runner            = require('./test-runner');
 require('dotenv').config();
 
 const app = express();
+const port = process.env.PORT || 3000; 
 
 // app.use('/client/public', express.static(process.cwd() + '/public'));
 
@@ -27,12 +28,16 @@ app.use(helmet.noCache());
 app.use(helmet.hidePoweredBy({setTo: 'PHP 4.2.0'}));
 
 //Index page (static HTML)
-app.use(express.static("dist"));
+// app.use(express.static("dist"));
 
-app.route('/')
-  .get(function (req, res) {
-    res.sendFile(process.cwd() + '/client/public/index.html');
-  });
+// app.route('/')
+//   .get(function (req, res) {
+//     res.sendFile(process.cwd() + '/client/public/index.html');
+//   });
+
+// https://coursework.vschool.io/deploying-mern-with-heroku/
+// deploy to Heroku
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 //For FCC testing purposes
 fccTestingRoutes(app);
@@ -48,9 +53,17 @@ app.use(function(req, res, next) {
     .send('Not Found');
 });
 
+// https://coursework.vschool.io/deploying-mern-with-heroku/
+// deploy to Heroku
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+})
+
+
+
 //Start our server and tests!
-app.listen(process.env.PORT || 3000, function () {
-  console.log("Listening on port " + process.env.PORT);
+app.listen(port, function () {
+  console.log("Listening on port " + port);
   if(process.env.NODE_ENV==='test') {
     console.log('Running Tests...');
     setTimeout(function () {
@@ -62,14 +75,15 @@ app.listen(process.env.PORT || 3000, function () {
           console.log(error);
       }
     }, 1500);
-  } else if (process.env.NODE_ENV === 'production') {
-    // set static folder
-    app.use(express.static('client/build'))
+  } 
+  // else if (process.env.NODE_ENV === 'production') {
+  //   // set static folder
+  //   app.use(express.static('client/build'))
 
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    });
-  }
+  //   app.get('*', (req, res) => {
+  //     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  //   });
+  // }
 });
 
 module.exports = app; //for unit/functional testing

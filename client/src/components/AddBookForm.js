@@ -17,16 +17,14 @@ class AddBookForm extends Component {
 
 	handleSubmit(event) {
 		const val = this.state.value;
-		fetch('api/books',{
+		fetch('http://localhost:3000/api/books',{
 		    method: 'POST',
 		    body: JSON.stringify({
 		      title: this.state.value
 		    }),
 		    headers: {"Content-Type": "application/json"}
 		  })
-		  .then((response) =>{
-		    return response.json()
-		  })
+		  .then((response) => response)
 		  .then((body) => {
 		  	/*
 	  		problem; 'this' is undefined and doesnt
@@ -37,7 +35,8 @@ class AddBookForm extends Component {
 	  		OR use arrow function which creates lexical scope in which
 	  		'this' will refer to the current scope
 		  	*/
-		    this.props.postedResult(body);
+		  	// console.log(body);
+		    this.props.postedResult(val);
 		  })
 		  .catch((err) => {
 		  	console.log('fetch error', err)

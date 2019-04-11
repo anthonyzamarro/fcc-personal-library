@@ -5,7 +5,8 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
-		"test": "mocha -u tdd"
+		"test": "mocha -u tdd",
+		"heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
 	},
 	"dependencies": {
 		"body-parser": "^1.15.2",
@@ -17,11 +18,11 @@
 		"helmet": "^3.1.0",
 		"mocha": "^3.2.0",
 		"mongodb": "^2.2.16",
-		"mongoose": "^5.4.20",
+		"mongoose": "^5.5.0",
 		"zombie": "^5.0.5"
 	},
 	"engines": {
-		"node": "4.4.3"
+		"node": "8.9.2"
 	},
 	"repository": {
 		"type": "git",

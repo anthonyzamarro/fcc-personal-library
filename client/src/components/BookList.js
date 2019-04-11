@@ -22,8 +22,14 @@ class BookList extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
+		/*
+			Not sending back correct response from routes
+			Check flow from Model to Controller and make 
+			sure the _doc is being sent back
+		*/
 		// newBook added to list
 		if (this.props.addedBook !== '' && this.props.addedBook.id !== prevProps.addedBook.id) {
+			console.log(this.props.addedBook);
 			this.setState({
 				allBooks: this.state.allBooks.concat(this.props.addedBook._doc)
 			});
