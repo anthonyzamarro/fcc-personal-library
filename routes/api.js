@@ -24,7 +24,7 @@ module.exports = function (app) {
   app.route('/api/books')
 
     .get(
-      // console.log('GET in api.js', req.params);
+      // console.log('GET in api.js', app);
       controller.getAllBooks
       //response will be array of book objects
       //json res format: [{"_id": bookid, "title": book_title, "commentcount": num_of_comments },...]
