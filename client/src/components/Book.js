@@ -72,7 +72,7 @@ class Book extends Component {
 	}
 
 	render() {
-		console.log('Book constructor', this.props);
+		// console.log('Book constructor', this.props);
 		let bookComments = this.state.commentList.length <= 0 
 		? '' : this.state.commentList.map((comment, key) => {
 			return <li key={key}>{comment}</li>

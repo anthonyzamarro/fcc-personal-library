@@ -7,10 +7,10 @@ const path        = require('path');
 const helmet      = require('helmet');
 
 
-const apiRoutes         = require('./routes/api.js');
+// const apiRoutes         = require('./routes/api.js');
+const books         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
-
 
 require('dotenv').config();
 
@@ -27,7 +27,7 @@ app.use(helmet.noCache());
 app.use(helmet.hidePoweredBy({setTo: 'PHP 4.2.0'}));
 
 //Index page (static HTML)
-app.use(express.static("dist"));
+// app.use(express.static("dist"));
 
 app.route('/')
   .get(function (req, res) {
@@ -38,14 +38,14 @@ app.route('/')
 fccTestingRoutes(app);
 
 //Routing for API 
-apiRoutes(app);
-// app.use('/api/books', apiRoutes);
+// apiRoutes(app);
+app.use('/api/books', books);
     
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)
     .type('text')
-    .send('Not Found');
+    .send('Not Found!!!');
 });
 
 //Start our server and tests!
@@ -62,8 +62,7 @@ app.listen(process.env.PORT || 3000, function () {
           console.log(error);
       }
     }, 1500);
-  } 
-  else if (process.env.NODE_ENV === 'production') {
+  } else if (process.env.NODE_ENV === 'production') {
     // set static folder
     app.use(express.static('client/dist'))
 
