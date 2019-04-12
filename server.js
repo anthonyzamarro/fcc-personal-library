@@ -28,12 +28,12 @@ app.use(helmet.noCache());
 app.use(helmet.hidePoweredBy({setTo: 'PHP 4.2.0'}));
 
 //Index page (static HTML)
-// app.use(express.static("dist"));
+app.use(express.static("dist"));
 
-// app.route('/api/books')
-//   .get(function (req, res) {
-//     res.sendFile(process.cwd() + '/client/public/index.html');
-//   });
+app.route('/api/books')
+  .get(function (req, res) {
+    res.sendFile(process.cwd() + '/client/public/index.html');
+  });
 
 // https://coursework.vschool.io/deploying-mern-with-heroku/
 // deploy to Heroku
