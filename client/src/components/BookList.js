@@ -10,10 +10,7 @@ class BookList extends Component {
 
 	componentDidMount() {
 		fetch('http://localhost:3000/api/books')
-			.then((response) => {
-				console.log(response)
-				return response.json()
-			})
+			.then((response) => response.json())
 			.then((books) => {
 				this.setState({
 					allBooks: this.state.allBooks.concat(books)

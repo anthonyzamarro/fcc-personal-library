@@ -49,27 +49,33 @@ app.use(function(req, res, next) {
 });
 
 //Start our server and tests!
-app.listen(process.env.PORT || 3000, function () {
-  console.log("Listening on port " + process.env.PORT);
-  if(process.env.NODE_ENV==='test') {
-    console.log('Running Tests...');
-    setTimeout(function () {
-      try {
-        runner.run();
-      } catch(e) {
-        var error = e;
-          console.log('Tests are not valid:');
-          console.log(error);
-      }
-    }, 1500);
-  } else if (process.env.NODE_ENV === 'production') {
+// app.listen(process.env.PORT || 3000, function () {
+//   console.log("Listening on port " + process.env.PORT);
+//   if(process.env.NODE_ENV==='test') {
+//     console.log('Running Tests...');
+//     setTimeout(function () {
+//       try {
+//         runner.run();
+//       } catch(e) {
+//         var error = e;
+//           console.log('Tests are not valid:');
+//           console.log(error);
+//       }
+//     }, 1500);
+//   } 
+// });
+
+if (process.env.NODE_ENV === 'production') {
     // set static folder
-    app.use(express.static('client/dist'))
+    app.use(express.static('client/build'))
 
     app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     });
   }
-});
+  
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => console.log(`Server started on ${port}`))
 
 module.exports = app; //for unit/functional testing
