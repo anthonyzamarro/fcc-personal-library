@@ -75,16 +75,17 @@ app.listen(port, function () {
           console.log(error);
       }
     }, 1500);
-  }  else if (process.env.NODE_ENV === 'production') {
-    // set static folder
-    app.use(express.static('client/dist'))
+  } 
+  //  else if (process.env.NODE_ENV === 'production') {
+  //   // set static folder
+  //   app.use(express.static('client/dist'))
 
-    console.log('production')
+  //   console.log('production')
 
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
-    });
-  }
+  //   app.get('*', (req, res) => {
+  //     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
+  //   });
+  // }
 });
 
 module.exports = app; //for unit/functional testing
