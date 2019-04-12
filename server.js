@@ -79,6 +79,8 @@ app.listen(port, function () {
     // set static folder
     app.use(express.static('client/dist'))
 
+    console.log('production')
+
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
     });
