@@ -37,7 +37,7 @@ app.route('/api/books')
 
 // https://coursework.vschool.io/deploying-mern-with-heroku/
 // deploy to Heroku
-app.use(express.static(path.join(__dirname, "client", "build")))
+app.use(express.static(path.join(__dirname, "client", "dist")))
 
 //For FCC testing purposes
 fccTestingRoutes(app);
@@ -56,7 +56,7 @@ app.use(function(req, res, next) {
 // https://coursework.vschool.io/deploying-mern-with-heroku/
 // deploy to Heroku
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 })
 
 
@@ -77,10 +77,10 @@ app.listen(port, function () {
     }, 1500);
   }  else if (process.env.NODE_ENV === 'production') {
     // set static folder
-    app.use(express.static('client/build'))
+    app.use(express.static('client/dist'))
 
     app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+      res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
     });
   }
 });
