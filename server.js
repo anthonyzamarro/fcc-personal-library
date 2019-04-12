@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, "client", "build")))
 fccTestingRoutes(app);
 
 //Routing for API 
-// apiRoutes(app);
+apiRoutes(app);
 // app.use('/api/books', apiRoutes);
     
 //404 Not Found Middleware
