@@ -3,6 +3,9 @@
 	"version": "0.0.1",
 	"description": "full-stack personal library project following FCC Information Security and Quality Assurance track",
 	"main": "server.js",
+	"files": [
+		"dist/index.js"
+	],
 	"scripts": {
 		"start": "node server.js",
 		"test": "mocha -u tdd",
