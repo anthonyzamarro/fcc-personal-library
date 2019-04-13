@@ -27,7 +27,7 @@ app.use(helmet.noCache());
 app.use(helmet.hidePoweredBy({setTo: 'PHP 4.2.0'}));
 
 //Index page (static HTML)
-app.use(express.static("dist"));
+app.use(express.static("dist")); 
 
 app.route('/')
   .get(function (req, res) {
