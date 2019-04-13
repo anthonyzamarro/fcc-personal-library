@@ -39,7 +39,7 @@ class Book extends Component {
 	addComment(e) {
 		e.preventDefault();
 		let text = this.state.commentText;
-		fetch(`http://localhost:3000/api/books/${this.props.bookInfo._id}`, {
+		fetch(`/api/books/${this.props.bookInfo._id}`, {
 			method: "POST",
 			body: JSON.stringify({
 		      comments: text

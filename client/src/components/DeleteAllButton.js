@@ -8,7 +8,7 @@ class DeleteAllButton extends Component {
 	}
 
 	deleteBooks(e) {
-		fetch('http://localhost:3000/api/books', {
+		fetch('/api/books', {
 			method: 'DELETE',
 		    body: JSON.stringify({
 		      id: 'TERMINATE'

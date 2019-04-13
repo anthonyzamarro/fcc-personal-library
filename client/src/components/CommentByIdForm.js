@@ -18,7 +18,7 @@ class CommentByIdForm extends Component {
 	}
 
 	handleSubmit(e) {
-		fetch(`http://localhost:3000/api/books/${this.state.bookId}`, {
+		fetch(`/api/books/${this.state.bookId}`, {
 			method: 'POST',
 			body: JSON.stringify({
 				comments: this.state.bookComment
