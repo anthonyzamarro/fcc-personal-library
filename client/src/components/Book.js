@@ -7,7 +7,7 @@ class Book extends Component {
 		this.state = {
 			addCommentsForm: false,
 			commentText: "",
-			commentList: this.props.bookInfo.comments
+			// commentList: this.props.bookInfo.comments
 		}
 
 		this.deletOne = this.deletOne.bind(this);
@@ -17,13 +17,13 @@ class Book extends Component {
 
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (this.props.commentFromId !== prevProps.commentFromId) {
-			this.setState({
-				commentList: this.state.commentList.concat(this.props.commentFromId)
-			})
-		}
-	}
+	// componentDidUpdate(prevProps, prevState) {
+	// 	if (this.props.commentFromId !== prevProps.commentFromId) {
+	// 		this.setState({
+	// 			commentList: this.state.commentList.concat(this.props.commentFromId)
+	// 		})
+	// 	}
+	// }
 
 	addCommentButton(id) {
 		this.setState({
@@ -59,7 +59,7 @@ class Book extends Component {
 
 	deletOne(bookId) {
 		console.log('deletOne id', this.props)
-		fetch(`http://localhost:3000/api/books/${bookId}`, {
+		fetch(`/api/books/${bookId}`, {
 			method: 'DELETE',
 			body: JSON.stringify({
 		      id: bookId
@@ -72,9 +72,9 @@ class Book extends Component {
 	}
 
 	render() {
-		// console.log('Book constructor', this.props);
-		let bookComments = this.state.commentList.length <= 0 
-		? '' : this.state.commentList.map((comment, key) => {
+		console.log('Book constructor', this.props);
+		let bookComments = this.props.bookInfo.comments.length <= 0 
+		? '' : this.props.bookInfo.comments.map((comment, key) => {
 			return <li key={key}>{comment}</li>
 		});
 		return (
