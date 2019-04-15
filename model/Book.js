@@ -10,6 +10,17 @@ const getAllBooks = (books, cb) => {
   })
 }
 
+const getOneBook = (book, cb) => {
+	// console.log('getOneBook', book);
+	Book.findById(book.params.id, (err, doc) => {
+		if (err) {
+			cb(err, 400)
+		} else {
+			cb(doc, 200)
+		}
+	})
+}
+
 const addBook = (book, cb) => {
   console.log('books in Book.js', book);
 
@@ -64,6 +75,7 @@ const deleteOneBook = (bookId, cb) => {
 
 module.exports = {
   getAllBooks,
+  getOneBook,
   addBook,
   addComment,
   deleteAllBooks,

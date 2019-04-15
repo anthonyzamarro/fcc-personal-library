@@ -63,7 +63,7 @@ const router = express.Router();
  router.post('/', controller.addBook)
  router.delete('/', controller.deleteAllBooks)
 
- router.get('/:id')
+ router.get('/:id', controller.getOneBook)
  router.post('/:id', (req, res) => controller.addComment(req, res))
  router.delete('/:id', (req, res) => controller.deletOneBook(req, res))
 

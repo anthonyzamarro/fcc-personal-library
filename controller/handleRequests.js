@@ -8,6 +8,12 @@ module.exports = {
 	    });
 	},
 
+	getOneBook: (req, res) => {
+		Model.getOneBook(req, (dbRes, code) => {
+			res.status(code).send(dbRes);
+		})
+	},
+
 	addBook: (req, res) => {
 		Model.addBook(req.body, (dbRes, code) => {
 	        res.status(code).send(dbRes);
