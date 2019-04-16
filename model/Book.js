@@ -11,7 +11,6 @@ const getAllBooks = (books, cb) => {
 }
 
 const getOneBook = (book, cb) => {
-	// console.log('getOneBook', book);
 	Book.findById(book.params.id, (err, doc) => {
 		if (err) {
 			cb(err, 400)
@@ -22,18 +21,21 @@ const getOneBook = (book, cb) => {
 }
 
 const addBook = (book, cb) => {
-  console.log('books in Book.js', book);
+  	if (book.title === '') {
+  		return;
+  	}
 
 	const newBook = new Book({
 		title: book.title
 	});
 
+
 	newBook.save((err) => {
 		if (err) {
 			cb(err, 400)
 		} else {
-			const response = {...newBook, "id": newBook._id};
-			cb(response, 200)
+			// const response = {, "id": newBook._id};
+			cb(newBook._doc, 200)
 		}
 	});
 }
@@ -48,10 +50,9 @@ const addComment = (book, cb) => {
 			doc.comments.push(comment);
 			doc.markModified('comments');
 			doc.save();
-			cb(doc.comments, 200);
+			cb(doc, 200);
 		}
 	});
-
 }
 
 const deleteAllBooks = (books, cb) => {

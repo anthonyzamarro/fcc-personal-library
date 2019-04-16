@@ -6,8 +6,7 @@ class Book extends Component {
 
 		this.state = {
 			addCommentsForm: false,
-			commentText: "",
-			// commentList: this.props.bookInfo.comments
+			commentText: ""
 		}
 
 		this.deletOne = this.deletOne.bind(this);
@@ -16,14 +15,6 @@ class Book extends Component {
 		this.getCommentText = this.getCommentText.bind(this);
 
 	}
-
-	// componentDidUpdate(prevProps, prevState) {
-	// 	if (this.props.commentFromId !== prevProps.commentFromId) {
-	// 		this.setState({
-	// 			commentList: this.state.commentList.concat(this.props.commentFromId)
-	// 		})
-	// 	}
-	// }
 
 	addCommentButton(id) {
 		this.setState({
@@ -72,7 +63,7 @@ class Book extends Component {
 	}
 
 	render() {
-		console.log('Book constructor', this.props);
+		// console.log('Book constructor', this.props);
 		let bookComments = this.props.bookInfo.comments.length <= 0 
 		? '' : this.props.bookInfo.comments.map((comment, key) => {
 			return <li key={key}>{comment}</li>
@@ -87,7 +78,12 @@ class Book extends Component {
 				{this.props.bookInfo !== "" && <button onClick={e => this.addCommentButton(this.props.bookInfo._id)}>Add Comment</button>}
 				{this.state.addCommentsForm && 
 					<form onSubmit={this.addComment}>
-						<input type="text" onChange={this.getCommentText} maxLength="50" />
+						<input 
+							type="text" 
+							onChange={this.getCommentText} 
+							minLength="5"
+        					maxLength="50"
+						/>
 						<input type="submit" value="add" />
 					</form>
 				}

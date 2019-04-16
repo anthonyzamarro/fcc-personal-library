@@ -26,10 +26,9 @@ class BookList extends Component {
 			sure the _doc is being sent back
 		*/
 		// newBook added to list
-		if (this.props.addedBook !== '' && this.props.addedBook.id !== prevProps.addedBook.id) {
-			console.log(this.props.addedBook);
+		if (this.props.addedBook._id !== prevProps.addedBook._id) {
 			this.setState({
-				allBooks: this.state.allBooks.concat(this.props.addedBook._doc)
+				allBooks: this.state.allBooks.concat(this.props.addedBook)
 			});
 		}
 

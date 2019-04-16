@@ -20,11 +20,20 @@ class AddBookForm extends Component {
 		fetch('/api/books',{
 		    method: 'POST',
 		    body: JSON.stringify({
-		      title: this.state.value
+		      title: val
 		    }),
-		    headers: {"Content-Type": "application/json"}
+		    headers: {
+		    	"Accept": "application/json",
+		    	"Content-Type": "application/json"
+		    }
 		  })
-		  .then((response) => response)
+		  .then((response) => {
+		  	// returns a promise
+		  	// https://stackoverflow.com/questions/36840396/react-fetch-gives-an-empty-response-body
+		  	if (response.ok) {
+			    return response.json()
+			  }
+		  })
 		  .then((body) => {
 		  	/*
 	  		problem; 'this' is undefined and doesnt
@@ -35,8 +44,8 @@ class AddBookForm extends Component {
 	  		OR use arrow function which creates lexical scope in which
 	  		'this' will refer to the current scope
 		  	*/
-		  	// console.log(body);
-		    this.props.postedResult(val);
+		  	console.log(body);
+		    this.props.postedResult(body);
 		  })
 		  .catch((err) => {
 		  	console.log('fetch error', err)
@@ -53,7 +62,13 @@ class AddBookForm extends Component {
         <label>
         	Book Title:
         	<br />
-        	<input type="text" value={this.state.value} onChange={this.handleChange}/>
+        	<input 
+        		type="text" 
+        		value={this.state.value} 
+        		onChange={this.handleChange}
+        		minLength="5"
+        		maxLength="50"
+        	/>
         </label>
         <input type="submit" value="Submit" />
         </form>

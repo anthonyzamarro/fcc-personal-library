@@ -40,13 +40,27 @@ class CommentByIdForm extends Component {
 					<label>
 					Book Id:
 					<br/>
-						<input type="text" name="bookId" onChange={this.handleChange} maxLength="50" placeholder="Book Id"/>
+						<input 
+							type="text" 
+							name="bookId" 
+							onChange={this.handleChange}
+							minLength="5"
+							maxLength="50" 
+							placeholder="Book Id"
+						/>
 					</label>
 					<br/>
 					<label>
 					Book Comment:
 					<br/>
-						<input type="text" name="bookComment" onChange={this.handleChange} maxLength="50" placeholder="Book Comment"/>
+						<input 
+							type="text" 
+							name="bookComment" 
+							onChange={this.handleChange} 
+							minLength="5"
+    						maxLength="50"
+							placeholder="Book Comment"
+						/>
 					</label>
 				<input type="submit" value="Submit" />
 				</form>
