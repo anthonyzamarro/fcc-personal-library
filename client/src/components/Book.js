@@ -16,6 +16,10 @@ class Book extends Component {
 
 	}
 
+	componentDidUpdate(prevProps) {
+		console.log('prevProps',prevProps, 'props', this.props);
+	}
+
 	addCommentButton(id) {
 		this.setState({
 			addCommentsForm: !this.state.addCommentsForm,
@@ -49,21 +53,30 @@ class Book extends Component {
 	}
 
 	deletOne(bookId) {
-		console.log('deletOne id', this.props)
 		fetch(`/api/books/${bookId}`, {
 			method: 'DELETE',
 			body: JSON.stringify({
 		      id: bookId
 		    }),
-		    headers: {"Content-Type": "application/json"}
+		    headers: {
+		    	"Accept": "application/json",
+		    	"Content-Type": "application/json"
+		    }
 		})
-		.then(response => response)
-		.then(res => this.props.deleteOneBook(bookId))
+		.then(response => {
+			if (response.ok) {
+		    return response.json()
+		  }
+		})
+		.then(res => {
+			console.log(this.props)
+			this.props.deleteOneBook(res._id)
+		})
 		.catch(err => console.log('deletOne err', err))
+		// console.log(this.props.bookInfo)
 	}
 
 	render() {
-		// console.log('Book constructor', this.props);
 		let bookComments = this.props.bookInfo.comments.length <= 0 
 		? '' : this.props.bookInfo.comments.map((comment, key) => {
 			return <li key={key}>{comment}</li>
@@ -71,9 +84,11 @@ class Book extends Component {
 		return (
 			<div className="Book">
 				<h3>Book</h3>
-				<div className="book-title">Title:{this.props.bookInfo.title}</div>
-				<div className="book-comments">Comments:<br/>{bookComments}</div>
-				<div className="book-id">ID:{this.props.bookInfo._id}</div>
+				<div className="book-info">
+					<div className="book-title">Title:{this.props.bookInfo.title}</div>
+					<div className="book-comments">Comments:<br/>{bookComments}</div>
+					<div className="book-id">ID:{this.props.bookInfo._id}</div>
+				</div>
 				{this.props.bookInfo !== "" && <button onClick={e => this.deletOne(this.props.bookInfo._id)}>Delete book</button>}
 				{this.props.bookInfo !== "" && <button onClick={e => this.addCommentButton(this.props.bookInfo._id)}>Add Comment</button>}
 				{this.state.addCommentsForm && 
@@ -81,7 +96,7 @@ class Book extends Component {
 						<input 
 							type="text" 
 							onChange={this.getCommentText} 
-							minLength="5"
+							minLength="1"
         					maxLength="50"
 						/>
 						<input type="submit" value="add" />

@@ -9,7 +9,7 @@ class BookList extends Component {
 	}
 
 	componentDidMount() {
-		fetch('/api/books')
+		fetch('/api/books/')
 			.then((response) => response.json())
 			.then((books) => {
 				this.setState({

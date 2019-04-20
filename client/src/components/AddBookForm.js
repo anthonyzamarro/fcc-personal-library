@@ -66,7 +66,7 @@ class AddBookForm extends Component {
         		type="text" 
         		value={this.state.value} 
         		onChange={this.handleChange}
-        		minLength="5"
+        		minLength="1"
         		maxLength="50"
         	/>
         </label>

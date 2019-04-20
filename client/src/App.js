@@ -27,6 +27,7 @@ class App extends Component {
 		this.viewOneBook = this.viewOneBook.bind(this);
 		this.removeBookFromList = this.removeBookFromList.bind(this);
 		this.addCommentById = this.addCommentById.bind(this);
+		this.deleteBook = this.deleteBook.bind(this);
 	}
 
 	postedNewBook(res) {
@@ -48,10 +49,18 @@ class App extends Component {
 		});
 	}
 
+	deleteBook(res) {
+		this.setState({
+			singleBook: "",
+			viewBook: false
+		})
+	}
+
 	removeBookFromList(res) {
 		this.setState({
 			deleteOneId: res
 		});
+		this.deleteBook(null)
 	}
 
 	addCommentById(res) {

@@ -66,7 +66,8 @@ const deleteOneBook = (bookId, cb) => {
 		if (err) {
 			cb(err, 400);
 		} else {
-			cb('delete successful', 200)
+			// console.log('deleteOneBook Book.js', doc)
+			cb({_id: bookId, message: "successfully deleted book"}, 200)
 		}
 	})
 
