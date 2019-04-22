@@ -74,6 +74,7 @@ class App extends Component {
   render(){
     return(
       <div className="App">
+      <div className="background"></div>
         <h1> Personal Libary </h1>
 	        <div className="container">
 	        	<div className="form-container">

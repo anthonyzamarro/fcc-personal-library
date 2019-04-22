@@ -34,7 +34,7 @@ class Book extends Component {
 	addComment(e) {
 		e.preventDefault();
 		let text = this.state.commentText;
-		fetch(`/api/books/${this.props.bookInfo._id}`, {
+		fetch(`http://localhost:3000/api/books/${this.props.bookInfo._id}`, {
 			method: "POST",
 			body: JSON.stringify({
 		      comments: text
@@ -53,7 +53,7 @@ class Book extends Component {
 	}
 
 	deletOne(bookId) {
-		fetch(`/api/books/${bookId}`, {
+		fetch(`http://localhost:3000/api/books/${bookId}`, {
 			method: 'DELETE',
 			body: JSON.stringify({
 		      id: bookId
