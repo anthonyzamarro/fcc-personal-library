@@ -74,16 +74,19 @@ class App extends Component {
   render(){
     return(
       <div className="App">
-      <div className="background"></div>
-        <h1> Personal Libary </h1>
+	      <div className="background">
+	        <h1> Personal Libary </h1>
+			<AddBookForm postedResult={this.postedNewBook} />
+	      </div>
 	        <div className="container">
 	        	<div className="form-container">
-		        <AddBookForm postedResult={this.postedNewBook} />
-		        <CommentByIdForm 
-		        	commentById={this.addCommentById}
-		        />
+		       	 	<CommentByIdForm 
+		        		commentById={this.addCommentById}
+		       	 	/>
 	        	</div>
+		        <hr />
 	        	<div className="book-container">
+	        	<h3>Book List</h3>
 		        <BookList 
 		        	addedBook={this.state.newBook}
 		        	shouldDelete={this.state.deleteAll}
@@ -98,8 +101,8 @@ class App extends Component {
 		        	/>
 		    	}
 	        	</div>
+		    	<DeleteAllButton delete={this.deleteAllBooks}/>
 		    </div>
-		    <DeleteAllButton delete={this.deleteAllBooks}/>
       </div>
     );
   }

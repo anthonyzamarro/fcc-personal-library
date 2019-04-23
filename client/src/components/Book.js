@@ -79,17 +79,17 @@ class Book extends Component {
 	render() {
 		let bookComments = this.props.bookInfo.comments.length <= 0 
 		? '' : this.props.bookInfo.comments.map((comment, key) => {
-			return <li key={key}>{comment}</li>
+			return <li key={key} className="text">{comment}</li>
 		});
 		return (
 			<div className="Book">
 				<h3>Book</h3>
 				<div className="book-info">
-					<div className="book-title">Title:{this.props.bookInfo.title}</div>
-					<div className="book-comments">Comments:<br/>{bookComments}</div>
-					<div className="book-id">ID:{this.props.bookInfo._id}</div>
+					<div className="book-title"><strong>Title:</strong><div className="text">{this.props.bookInfo.title}</div></div>
+					<div className="book-id"><strong>ID:</strong><div className="text">{this.props.bookInfo._id}</div></div>
+					<div className="book-comments"><strong>Comments:</strong><br/><div className="text">{bookComments}</div></div>
 				</div>
-				{this.props.bookInfo !== "" && <button onClick={e => this.deletOne(this.props.bookInfo._id)}>Delete book</button>}
+				{this.props.bookInfo !== "" && <button onClick={e => this.deletOne(this.props.bookInfo._id)} className="delete-btn">Delete book</button>}
 				{this.props.bookInfo !== "" && <button onClick={e => this.addCommentButton(this.props.bookInfo._id)}>Add Comment</button>}
 				{this.state.addCommentsForm && 
 					<form onSubmit={this.addComment}>

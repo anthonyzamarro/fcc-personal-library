@@ -52,6 +52,7 @@ class BookList extends Component {
 				<li 
 					key={book._id}
 					onClick={e => this.props.viewOneFromList(book)}
+					className="text bl-text"
 				>
 					{book.title}
 				</li>
@@ -60,7 +61,6 @@ class BookList extends Component {
 
 		return(
 			<div className="BookList">
-			<h3>Book List</h3>
 				{bookTitles}
 			</div>
 		);
