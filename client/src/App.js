@@ -26,7 +26,7 @@ class App extends Component {
 		this.deleteAllBooks = this.deleteAllBooks.bind(this);
 		this.viewOneBook = this.viewOneBook.bind(this);
 		this.removeBookFromList = this.removeBookFromList.bind(this);
-		this.addCommentById = this.addCommentById.bind(this);
+		this.addComment = this.addComment.bind(this);
 		this.deleteBook = this.deleteBook.bind(this);
 	}
 
