@@ -9,7 +9,7 @@ class BookList extends Component {
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:3000/api/books/')
+		fetch('/api/books/')
 			.then((response) => response.json())
 			.then((books) => {
 				this.setState({
@@ -20,12 +20,6 @@ class BookList extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		/*
-			Not sending back correct response from routes
-			Check flow from Model to Controller and make 
-			sure the _doc is being sent back
-		*/
-		// newBook added to list
 		if (this.props.addedBook._id !== prevProps.addedBook._id) {
 			this.setState({
 				allBooks: this.state.allBooks.concat(this.props.addedBook)

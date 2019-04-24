@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AddBookForm  from './components/AddBookForm';
 import BookList  from './components/BookList';
 import Book from './components/Book';
-
+import AddComment from './components/AddComment';
 import CommentByIdForm from './components/CommentByIdForm';
 import DeleteAllButton from './components/DeleteAllButton';
 
@@ -20,7 +20,7 @@ class App extends Component {
 			singleBook: "",
 			viewBook: false,
 			deleteOneId: "",
-			commentFromIdForm: ""
+			commentFromIdForm: "",
 		}
 		this.postedNewBook = this.postedNewBook.bind(this);
 		this.deleteAllBooks = this.deleteAllBooks.bind(this);
@@ -63,7 +63,8 @@ class App extends Component {
 		this.deleteBook(null)
 	}
 
-	addCommentById(res) {
+	addComment(res) {
+		console.log('addCommentById', res)
 		this.setState({
 			commentFromIdForm: res
 		})
@@ -79,13 +80,6 @@ class App extends Component {
 			<AddBookForm postedResult={this.postedNewBook} />
 	      </div>
 	        <div className="container">
-	        	<div className="form-container">
-		       	 	<CommentByIdForm 
-		        		commentById={this.addCommentById}
-		       	 	/>
-	        	</div>
-		        <hr />
-	        	<div className="book-container">
 	        	<h3>Book List</h3>
 		        <BookList 
 		        	addedBook={this.state.newBook}
@@ -93,14 +87,28 @@ class App extends Component {
 		        	viewOneFromList={this.viewOneBook}
 		        	deleteOneFromList={this.state.deleteOneId}
 		        />
-		        {this.state.viewBook && 
-		        	<Book 
-		        		deleteOneBook={this.removeBookFromList}
-		        		bookInfo={this.state.singleBook}
-		        		commentFromId={this.state.commentFromIdForm}
-		        	/>
-		    	}
+		        <hr />
+	        	<div className="form-container">
+		       	 	<CommentByIdForm 
+		        		comment={this.addComment}
+		       	 	/>
 	        	</div>
+	        	<div className="book-container">
+			        {this.state.viewBook &&
+			        	<div>
+			        		<Book 
+			        			deleteOneBook={this.removeBookFromList}
+			        			bookInfo={this.state.singleBook}
+			        			commentFromId={this.state.commentFromIdForm}
+			        		/>
+			        		<AddComment 
+			        			bookInfo={this.state.singleBook}
+			        			comment={this.addComment}
+			        		/>
+			        	</div>
+			    	}
+	        	</div>
+	        	<hr />
 		    	<DeleteAllButton delete={this.deleteAllBooks}/>
 		    </div>
       </div>

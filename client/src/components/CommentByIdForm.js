@@ -18,7 +18,7 @@ class CommentByIdForm extends Component {
 	}
 
 	handleSubmit(e) {
-		fetch(`http://localhost:3000/api/books/${this.state.bookId}`, {
+		fetch(`/api/books/${this.state.bookId}`, {
 			method: 'POST',
 			body: JSON.stringify({
 				comments: this.state.bookComment
@@ -27,7 +27,7 @@ class CommentByIdForm extends Component {
 
 		})
 		.then(res => res)
-		.then(response => this.props.commentById(this.state.bookComment))
+		.then(response => this.props.comment(this.state.bookComment))
 		.catch(err => console.log('CommentByIdForm err', err))
 		e.preventDefault();
 	}

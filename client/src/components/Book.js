@@ -11,13 +11,15 @@ class Book extends Component {
 
 		this.deletOne = this.deletOne.bind(this);
 		this.addCommentButton = this.addCommentButton.bind(this);
-		this.addComment = this.addComment.bind(this);
 		this.getCommentText = this.getCommentText.bind(this);
 
 	}
 
 	componentDidUpdate(prevProps) {
-		console.log('prevProps',prevProps, 'props', this.props);
+		if (prevProps.commentFromId !== this.props.commentFromId) {
+			this.props.bookInfo.comments.push(this.props.commentFromId);
+			this.forceUpdate();
+		}
 	}
 
 	addCommentButton(id) {
@@ -31,29 +33,8 @@ class Book extends Component {
 		this.setState({commentText: e.target.value})
 	}
 
-	addComment(e) {
-		e.preventDefault();
-		let text = this.state.commentText;
-		fetch(`http://localhost:3000/api/books/${this.props.bookInfo._id}`, {
-			method: "POST",
-			body: JSON.stringify({
-		      comments: text
-		    }),
-		    headers: {"Content-Type": "application/json"}
-		})
-		.then(res => res)
-		.then(response => {
-			if (response.status == 200) {
-				this.setState({
-					commentList: this.state.commentList.concat(text)
-				});
-			}
-		})
-		.catch(err => console.log('addCOmment error', err))
-	}
-
 	deletOne(bookId) {
-		fetch(`http://localhost:3000/api/books/${bookId}`, {
+		fetch(`/api/books/${bookId}`, {
 			method: 'DELETE',
 			body: JSON.stringify({
 		      id: bookId
@@ -73,7 +54,6 @@ class Book extends Component {
 			this.props.deleteOneBook(res._id)
 		})
 		.catch(err => console.log('deletOne err', err))
-		// console.log(this.props.bookInfo)
 	}
 
 	render() {
@@ -89,19 +69,7 @@ class Book extends Component {
 					<div className="book-id"><strong>ID:</strong><div className="text">{this.props.bookInfo._id}</div></div>
 					<div className="book-comments"><strong>Comments:</strong><br/><div className="text">{bookComments}</div></div>
 				</div>
-				{this.props.bookInfo !== "" && <button onClick={e => this.deletOne(this.props.bookInfo._id)} className="delete-btn">Delete book</button>}
-				{this.props.bookInfo !== "" && <button onClick={e => this.addCommentButton(this.props.bookInfo._id)}>Add Comment</button>}
-				{this.state.addCommentsForm && 
-					<form onSubmit={this.addComment}>
-						<input 
-							type="text" 
-							onChange={this.getCommentText} 
-							minLength="1"
-        					maxLength="50"
-						/>
-						<input type="submit" value="add" />
-					</form>
-				}
+				{this.props.bookInfo !== "" && <button onClick={e => this.deletOne(this.props.bookInfo._id)} className="book-btn delete-btn">Delete book</button>}
 			</div>
 		)
 	}

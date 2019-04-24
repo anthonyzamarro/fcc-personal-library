@@ -17,9 +17,7 @@ li {
 }
 
 .App {
-  /*margin: 1rem;*/
   font-family: Arial, Helvetica, sans-serif;
-  /*max-width: 960px;*/
   margin: auto;
   position: relative;
   min-height: 600px;
@@ -30,25 +28,18 @@ li {
 	background-size: cover;
 	background-position: center;
 	min-height: 300px;
-	/*background: #dedded;
-	height: 100%;
-	min-height: 600px;
-	opacity: .6;
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	width: 100%;*/
 }
 
 .background h1 {
 	color: #fff;
 	margin: 0;
+	padding-top: 30px;
 }
 
 
 .AddBookForm {
 	max-width: 460px;
-	margin: auto;
+	margin: 0 12px;
 	background: #e7e8ea;
 	padding: 24px;
 	border-radius: 7px;
@@ -56,10 +47,6 @@ li {
 }
 
 .container {
-	/*display: flex;*/
-	flex-direction: column;
-	align-items: center;
-    justify-content: space-evenly;
     padding: 0 24px;
 }
 
@@ -71,14 +58,20 @@ h1,
 }
 
 .form-container {
-	width: 50%;
+	width: 100%;
 }
 
 .BookList {
 	display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    align-items: center;
+	flex-direction: column;
+
+}
+
+
+.Book input[type="text"] {
+	width: 86%;
 }
 
 .bl-text {
@@ -89,6 +82,7 @@ h1,
     cursor: pointer;
     opacity: .9;
     box-shadow: 1px 1px 1px;
+    margin-bottom: 12px;
 }
 
 .bl-text:hover {
@@ -117,9 +111,13 @@ h1,
 	flex: 1 1 100%;
 }
 
+.book-btn {
+	height: 30px;
+	margin-bottom: 12px;
+}
 
 input[type="text"] {
-	width: 85%;
+	width: 75%;
     margin-bottom: 12px;
     height: 45px;
     border: none;
@@ -168,11 +166,33 @@ button {
 }
 
 @media screen and (min-width: 500px) {
-	.container {
-		flex-direction: row;
+	.form-container {
+		width: 50%;		
 	}
 
-	.delete-all-btn {
-	    /*float: right;*/
+	.container {
+		max-width: 960px;
+		margin: auto;
+	}
+
+	input[type="text"] {
+		width: 85%;
+	}
+
+	.Book input[type="text"] {
+		width: 43%;
+	}
+
+	.AddBookForm {
+		margin: auto;
+	}
+
+	.BookList {
+	    flex-direction: row;
+	    align-items: center;
+	}
+	
+	.bl-text {
+		margin-bottom: 0;
 	}
 }
