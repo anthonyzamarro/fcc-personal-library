@@ -17,7 +17,7 @@ class AddBookForm extends Component {
 
 	handleSubmit(event) {
 		const val = this.state.value;
-		fetch('http://localhost:3000/api/books',{
+		fetch('/api/books',{
 		    method: 'POST',
 		    body: JSON.stringify({
 		      title: val
