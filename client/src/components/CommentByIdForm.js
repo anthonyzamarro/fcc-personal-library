@@ -47,6 +47,7 @@ class CommentByIdForm extends Component {
 							minLength="5"
 							maxLength="50" 
 							placeholder="Book Id"
+							required
 						/>
 					</label>
 					<br/>
